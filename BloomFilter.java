@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Adrian Mleczek 001
  *
  *   Note, additional comments provided throughout source code is
  *   for educational purposes.
@@ -223,8 +223,18 @@ class BloomFilter {
         // of type BitSet (Java class BitSet). See Oracle documentation for
         // this class on available methods. You can also see how method 'add'
         // in this class uses the object.
+        for(int i = 0; i < noHashes; i++)
+        {
+            //generates a hash for s using method #i
+            long hc = hashCode(s,i);
+            //assigns the hash to a bit using a hashmask
+            int bitNo = (int) (hc) & this.hashMask;
+            //checks to see if the bit is present in the map
+            if(!data.get(bitNo))
+                return false;
+        }
 
-        return false;
+        return true;
     }
 
 

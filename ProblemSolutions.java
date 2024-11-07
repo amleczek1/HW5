@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *  Adrian Mleczek / 001
  *
  *   This java file contains the problem solutions of isSubSet, findKthLargest,
  *   and sort2Arrays methods. You should utilize the Java Collection Framework for
@@ -32,9 +32,23 @@ class ProblemSolutions {
 
     public boolean isSubset(int list1[], int list2[]) {
 
-        // ADD YOU CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
+        //create and populate the hash map
+        HashMap<Integer, Integer> main = new HashMap<>();
+        for(int i =0; i < list1.length;i++)
+        {
+           main.put(i, list1[i]);
+        }
+        
+        //checks to see if each value in the subset(list2) is in the mainset(list1)
+        for(int i=0; i<list2.length;i++)
+        {
+            if(main.containsValue(list2[i])==false)
+            {
+                return false;
+            }
+        }
 
-        return false;
+        return true;
     }
 
 
@@ -53,9 +67,21 @@ class ProblemSolutions {
 
     public int findKthLargest(int[] array, int k) {
 
-        // ADD YOUR CODE HERE
-
-        return 0;
+        //creates and populates a priority queue
+        PriorityQueue<Integer> sort = new PriorityQueue<>();
+        for (int i: array)
+        {
+            sort.offer(i);
+        }
+        
+        //removes values until only the K largest remain
+        while(sort.size()>k)
+        {
+            sort.remove();
+        }
+        
+        //returns the top of the queue, the smallest/kth-maximum value
+        return sort.peek();
     }
 
 
@@ -73,10 +99,32 @@ class ProblemSolutions {
      */
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
+        
+        //creates array to sort results
+        int[] results = new int[array1.length + array2.length];
+        
+        
+        //creates PQ that is populated with elements from each list
+        PriorityQueue<Integer> sorted = new PriorityQueue<>();
+        for(int i: array1)
+        {
+            sorted.offer(i);
+        }
+         for(int x: array2)
+        {
+            sorted.offer(x);
+        }
+         
+        //populates results[] by polling the PQ until its empty
+        int z = 0;
+        while (sorted.isEmpty()==false)
+        {
+            results[z]= sorted.poll();
+            z++;
+        }
 
-        // ADD YOU CODE HERE
-
-        return null;
+        return results;
     }
 
 }
+
